@@ -25,6 +25,19 @@
   color: white;
 }
 
+.user {
+  background-color: white;
+}
+
+.username {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.user-form {
+  margin: 20px 200px;
+}
+
 a {
   text-decoration: none !important;
   color: black;

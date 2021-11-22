@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 
@@ -31,11 +32,21 @@ const UsersForm = (props) => {
         }
         
     }
+
+    const onSubmit = async (event) => {
+        event.preventDefault();
+        const user = {
+            age: age,
+            username: username
+        }
+        console.log(user)
+        await props.handleOnSubmit(user);
+    }
     
     return (
         <div style={style}>
             <h2>Add User</h2>
-            <Form>
+            <Form onSubmit={onSubmit} className="user-form">
                 <Form.Group controlId="name">
                     <Form.Label>User Name</Form.Label>
                     <Form.Control
