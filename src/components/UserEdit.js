@@ -12,8 +12,7 @@ const UserEdit = ({users}) => {
     const history = useHistory();
 
     const handleOnSubmit = async (user) => {
-        console.log('userToEdit', await user);
-        await axios.put("http://localhost:3030/users", {
+        await axios.put(BASE_URL, {
             'uuid': String(await user.uuid),
             'age': Number(await user.age),
             'username': String(await user.username),
@@ -25,7 +24,6 @@ const UserEdit = ({users}) => {
                 'Content-Type': 'application/json'
             }
         }).then((response) => {
-            console.log(`userEdited`, response.data);
             history.push('/');
         }).catch((error) => {
             console.log('error', error)
@@ -38,6 +36,5 @@ const UserEdit = ({users}) => {
             <UsersForm user={userToEdit} editUser={true} handleOnSubmit={handleOnSubmit}></UsersForm>
         </div>
     )
-
 }
 export default UserEdit;
