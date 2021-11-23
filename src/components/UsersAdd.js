@@ -10,6 +10,12 @@ const UserAdd = ({history, users}) => {
         await axios.post("http://localhost:3030/users/create", {
             username: String(await user.username),
             age: Number(await user.age)
+        }, {
+            headers: {
+                'Accept': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control': '*'
+            }
         }).then((response) => {
             console.log(response)
         }).catch((error) => {
