@@ -14,7 +14,8 @@ const UsersForm = (props) => {
         createdAt: props.user ? props.user.createdAt : '',
         updatedAt: props.user ? props.user.updatedAt : '',
     });
-    const { username, age, createdAt, updatedAt, uuid} = user;
+    const { username, age, uuid} = user;
+    const { editUser } = props;
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -37,15 +38,15 @@ const UsersForm = (props) => {
         event.preventDefault();
         const user = {
             age: age,
-            username: username
+            username: username,
+            uuid: uuid
         }
-        console.log(user)
         await props.handleOnSubmit(user);
     }
     
     return (
         <div style={style}>
-            <h2>Add User</h2>
+            <h2>{editUser ? `Edit User` : `Add User`}</h2>
             <Form onSubmit={onSubmit} className="user-form">
                 <Form.Group controlId="name">
                     <Form.Label>User Name</Form.Label>
