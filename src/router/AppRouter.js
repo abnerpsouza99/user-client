@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import UsersList from "../components/UsersList";
 import axios from 'axios';
 import { get } from "lodash";
+import UserEdit from "../components/UserEdit";
 
 const BASE_URL = "http://localhost:3030/users";
 
@@ -42,6 +43,9 @@ const AppRouter = () => {
                         <Route render={(props) => {
                             return <UserAdd {...props} users={users}></UserAdd>
                         }} path="/add"/>
+                        <Route render={(props) => {
+                            return <UserEdit {...props} users={users}></UserEdit>
+                        }} path="/edit/:userUuid"/>
                     </Switch>
                 </div>
             </div>
