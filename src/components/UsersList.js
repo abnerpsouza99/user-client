@@ -8,7 +8,15 @@ const BASE_URL = "http://localhost:3030/users"
 
 const style = {
     textAlign: "center",
-    margin: "20px 200px"
+    margin: "20px 200px",
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr 1fr"
+}
+
+const styleMessage = {
+    textAlign: "center !important",
+    margin: "20px 200px",
+    width: "100%"
 }
 
 class UsersList extends React.Component {
@@ -19,7 +27,8 @@ class UsersList extends React.Component {
         }
     }
 
-    async getUsers() {
+    getUsers = async () => {
+        console.log('getUsers')
         await axios.get(BASE_URL + "/all", {
             headers: {
                 'Accept': 'application/json',
@@ -27,9 +36,15 @@ class UsersList extends React.Component {
                 'Access-Control': '*'
             }
         }).then((response) => {
-            this.setState({
-                users: Array.from(response.data)
-            })
+            if(response.data == 'Not exist users registered!'){
+                this.setState({
+                    users: []
+                })
+            } else {
+                this.setState({
+                    users: Array.from(response.data)
+                })
+            }
         }).catch((error) => {
             console.log('error', error)
         })
@@ -41,16 +56,17 @@ class UsersList extends React.Component {
 
     render() {
 
-        const { users } = this.state;
+        let { users } = this.state;
+        const props = this.props;
 
         return (
             <div style={style}>
                 {users.length > 0 ? (
                     users.map((user) => {
-                        return <User key={user.uuid} {...user}></User>
+                        return <User key={user.uuid} {...props} {...user}></User>
                     })
                 ) : (
-                    <p className="message">No users available. Please, add some user!</p>
+                    <p className="message" style={styleMessage}>No users available. Please, add some user!</p>
                 )}
             </div>
         )
